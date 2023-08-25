@@ -93,12 +93,59 @@ document.addEventListener("DOMContentLoaded", () => {
         rowInputs[nextIndex].focus();
     }
 
-    function addMatrixes(){
-        const matrixArows = matrixInputsContainerA.children
-        const matrixBrows = matrixInputsContainerB.children
-
+    function performAddition(){
+        const A = getMatrixA();
+        const B = getMatrixB();
         
     }
 
+    function getMatrixA(){
+
+        const matrix = []
+
+        const qRows = matrixInputsContainerA.children.length;
+        const rows = matrixInputsContainerA.children;
+
+        for(let i = 0; i < qRows; i++) {
+            const row = [];
+            const qCols = rows[i].children.length;
+            const cols = rows[i].children;
+
+            for (let j = 0; j < qCols; j++) {
+                const cellValue = cols[j].value;
+                row.push(cellValue);
+            }
+            matrix.push(row);
+        }
+        
+        console.log(`Matrix A is ${matrix}`);
+        return matrix;
+    }
+
+    function getMatrixB(){
+        const matrix = []
+
+        const qRows = matrixInputsContainerB.children.length;
+        const rows = matrixInputsContainerB.children;
+
+        for(let i = 0; i < qRows; i++) {
+            const row = [];
+            const qCols = rows[i].children.length;
+            const cols = rows[i].children;
+
+            for (let j = 0; j < qCols; j++) {
+                const cellValue = cols[j].value;
+                row.push(cellValue);
+            }
+            matrix.push(row);
+        }
+        
+        console.log(`Matrix B is ${matrix}`);
+        return matrix;       
+    }
+
+    function addMatrixes(matrixA, matrixB){
+        
+    }
     // ... (otros listeners y código) ...
 });
