@@ -1,3 +1,8 @@
+//TO-DO//
+/* -Cast a matrix to the result display
+*/
+
+
 document.addEventListener("DOMContentLoaded", () => {
     const matrixInputsContainerA = document.querySelector("#matrixInputsA .matrix-input-container");
     const matrixInputsContainerB = document.querySelector("#matrixInputsB .matrix-input-container");
@@ -26,6 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
         for(let j = 0; j < columnCount; j++){
             const cell = document.createElement("input");
             cell.readOnly = true;
+            cell.value = 0;
             cell.addEventListener("keydown", handleArrowKeys);
             row.appendChild(cell);
         }
@@ -37,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
         rowDiv.classList.add("matrix-input-row");
         for (let j = 0; j < colCount; j++) {
             const input = document.createElement("input");
+            input.value = 0;
             input.addEventListener("keydown", handleArrowKeys);
             rowDiv.appendChild(input);
         }
@@ -61,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    document.getElementById("calculateButton").addEventListener("click", () => {addMatrixes();})
+    document.getElementById("calculateButton").addEventListener("click", () => {performAddition();})
 
     function handleArrowKeys(event) {
         const input = event.target;
@@ -97,6 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const A = getMatrixA();
         const B = getMatrixB();
         
+        addMatrixes(A, B);
     }
 
     function getMatrixA(){
@@ -112,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const cols = rows[i].children;
 
             for (let j = 0; j < qCols; j++) {
-                const cellValue = cols[j].value;
+                const cellValue = parseFloat(cols[j].value);
                 row.push(cellValue);
             }
             matrix.push(row);
@@ -134,7 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const cols = rows[i].children;
 
             for (let j = 0; j < qCols; j++) {
-                const cellValue = cols[j].value;
+                const cellValue = parseFloat(cols[j].value);
                 row.push(cellValue);
             }
             matrix.push(row);
@@ -145,7 +153,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function addMatrixes(matrixA, matrixB){
-        
+        const result = [];
+
+        for (let r = 0; r < matrixA.length; r++)
+        {
+            const row = []; 
+            
+            for (let c = 0; c < matrixA[r].length; c++){
+                row.push(matrixA[r][c] + matrixB[r][c]);
+            }
+            result.push(row);
+        }
+        console.log(result);
     }
-    // ... (otros listeners y código) ...
+    
+    
 });
