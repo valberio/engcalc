@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Matrices</title>
+</head>
+<body>
+    <h1>Calculadora de Matrices</h1>
+    
+    <form id="matrixForm">
+        <div id="matrixInputsA">
+            <h2>Matriz A</h2>
+            <div class="matrix-input-container">
+                <!-- Campos de entrada de matriz A se generarán aquí dinámicamente -->
+
+            </div>
+            <button type="button" class="add-row">Agregar Fila</button>
+            <button type="button" class="add-column">Agregar Columna</button>
+        </div>
+
+        <select id="operation">
+            <option value="add">Suma</option>
+            <option value="subtract">Resta</option>
+            <option value="multiply">Multiplicación</option>
+            <!-- Agrega más operaciones si es necesario -->
+        </select>
+
+        <div id="matrixInputsB">
+            <!-- Similar a la entrada de Matriz A -->
+            <h2>Matriz B</h2>
+            <div class="matrix-input-container">
+              <!-- Campos de entrada de matriz A se generarán aquí dinámicamente -->
+
+          </div>
+          <button type="button" class="add-row">Agregar Fila</button>
+          <button type="button" class="add-column">Agregar Columna</button>
+        </div>
+        <button type="button" id="calculateButton">Calcular</button>
+    </form>
+    
+    <div id="result">
+        <h2>Resultado</h2>
+        <div class="matrix-input-container"></div>
+    </div>
+    
+    <script src="matrix_calculator.js"></script>
+</body>
+</html>
