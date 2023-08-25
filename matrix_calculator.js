@@ -104,7 +104,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const A = getMatrixA();
         const B = getMatrixB();
         
-        addMatrixes(A, B);
+        const result = addMatrixes(A, B);
+        console.log(`El resultado de la operacion es ${result}`);
+        showMatrixOnResult(result);
     }
 
     function getMatrixA(){
@@ -164,8 +166,20 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             result.push(row);
         }
-        console.log(result);
+        return result;
     }
     
-    
+    function showMatrixOnResult(matrix){
+
+        const resultRows = resultMatrix.children;
+        //adequate rows and columns
+        for (let r = 0; r < matrix.length; r++){
+            const resultCols = resultRows[r].children;
+            for (let c = 0; c < matrix[r].length; c++){
+                resultCols[c].value = matrix[r][c];
+            }
+        }
+    }
 });
+
+//TO DO: dimension checks
