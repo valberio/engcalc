@@ -68,7 +68,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    document.getElementById("calculateButton").addEventListener("click", () => {performAddition();})
+    document.getElementById("additionButton").addEventListener("click", () => {performAddition();})
+    document.getElementById("substractionButton").addEventListener("click", () => {performSubstraction();})
+    document.getElementById("multiplicationButton").addEventListener("click", () => {performMultiplication();})
 
     function handleArrowKeys(event) {
         const input = event.target;
@@ -106,6 +108,24 @@ document.addEventListener("DOMContentLoaded", () => {
         
         const result = addMatrixes(A, B);
         console.log(`El resultado de la operacion es ${result}`);
+        showMatrixOnResult(result);
+    }
+
+    function performSubstraction(){
+        const a = getMatrixA();
+        const b = getMatrixB();
+
+        const result = substractMatrixes(a, b);
+        console.log(`El resultado de la resta es ${result}`);
+        showMatrixOnResult(result);
+    }
+
+    function performMultiplication(){
+        const a = getMatrixA();
+        const b = getMatrixB();
+
+        const result = multiplyMatrixes(a, b);
+        console.log(`El resultado de la multiplicacion es ${result}`);
         showMatrixOnResult(result);
     }
 
@@ -165,6 +185,38 @@ document.addEventListener("DOMContentLoaded", () => {
                 row.push(matrixA[r][c] + matrixB[r][c]);
             }
             result.push(row);
+        }
+        return result;
+    }
+
+    function substractMatrixes(matrixA, matrixB){
+        const result = [];
+
+        for (let r = 0; r < matrixA.length; r++)
+        {
+            const row = []; 
+            
+            for (let c = 0; c < matrixA[r].length; c++){
+                row.push(matrixA[r][c] - matrixB[r][c]);
+            }
+            result.push(row);
+        }
+        return result;
+    }
+
+    function multiplyMatrixes(matrixA, matrixB){
+        const result = [];
+
+        for (let i = 0; i < matrixA.length; i++) {
+            const resultRow = [];
+            for (let j = 0; j < matrixB[0].length; j++) {
+                let sum = 0;
+                for (let k = 0; k < matrixA[i].length; k++) {
+                    sum += matrixA[i][k] * matrixB[k][j];
+                }
+                resultRow.push(sum);
+            }
+            result.push(resultRow);
         }
         return result;
     }
