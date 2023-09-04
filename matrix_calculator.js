@@ -232,6 +232,10 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     }
+
+    function ammountOfRows(matrix){
+        
+    }
 });
 
 //TO DO: dimension checks

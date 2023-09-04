@@ -3,42 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <title>Calculadora de Matrices</title>
 </head>
 <body>
-    <h1>Calculadora de Matrices</h1>
+
+    <div class="container">
+        <!--Menú lateral izquierdo-->
+        <div class="row">
+        <div class="col-md-3">
+            <h2>Otras calculadoras</h2>
+        </div>
+
+        <!--Zona de matrices y cálculos-->
+        <div class="col-md-9">
+            <div class="row">
+                <h1>Calculadora de Matrices</h1>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <form id="matrixForm">
+                        <div id="matrixInputsA">
+                            <h2>Matriz A</h2>
+                            <div class="matrix-input-container">
+                                <!-- Campos de entrada de matriz A se generarán aquí dinámicamente -->
     
-    <form id="matrixForm">
-        <div id="matrixInputsA">
-            <h2>Matriz A</h2>
-            <div class="matrix-input-container">
-                <!-- Campos de entrada de matriz A se generarán aquí dinámicamente -->
+                            </div>
+                            <button type="button" class="add-row">Agregar Fila</button>
+                            <button type="button" class="add-column">Agregar Columna</button>
+                        </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div id="matrixInputsB">
+                        <!-- Similar a la entrada de Matriz A -->
+                        <h2>Matriz B</h2>
+                        <div class="matrix-input-container">
+                        <!-- Campos de entrada de matriz A se generarán aquí dinámicamente -->
+                    </div>
+                    <button type="button" class="add-row">Agregar Fila</button>
+                    <button type="button" class="add-column">Agregar Columna</button>
+                    </div>
+                    <button type="button" id="additionButton">Sumar</button>
+                    <button type="button" id="substractionButton">Restar</button>
+                    <button type="button" id="multiplicationButton">Multiplicar</button>
+                </form>
+                </div>
+
+                <div class="col-md-4">
+                    <div id="result">
+                        <h2>Resultado</h2>
+                        <div class="matrix-input-container"></div>
+                    </div>
+                </div>
 
             </div>
-            <button type="button" class="add-row">Agregar Fila</button>
-            <button type="button" class="add-column">Agregar Columna</button>
         </div>
-
-        <div id="matrixInputsB">
-            <!-- Similar a la entrada de Matriz A -->
-            <h2>Matriz B</h2>
-            <div class="matrix-input-container">
-              <!-- Campos de entrada de matriz A se generarán aquí dinámicamente -->
-
-          </div>
-          <button type="button" class="add-row">Agregar Fila</button>
-          <button type="button" class="add-column">Agregar Columna</button>
-        </div>
-        <button type="button" id="additionButton">Sumar</button>
-        <button type="button" id="substractionButton">Restar</button>
-        <button type="button" id="multiplicationButton">Multiplicar</button>
-    </form>
-    
-    <div id="result">
-        <h2>Resultado</h2>
-        <div class="matrix-input-container"></div>
     </div>
-    
+    </div>
     <script src="matrix_calculator.js"></script>
 </body>
 </html>
