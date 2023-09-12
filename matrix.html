@@ -9,7 +9,7 @@
 </head>
 <body>
 
-    <div class="container">
+    <div class="container-fluid">
         <!--Menú lateral izquierdo-->
         <div class="row">
         <div class="col-md-3">
@@ -22,10 +22,10 @@
                 <h1>Calculadora de Matrices</h1>
             </div>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3 p-4">
                     <form id="matrixForm">
                         <div id="matrixInputsA">
-                            <h2>Matriz A</h2>
+                            <h3 class="text-center">Matriz A</h2>
                             <div class="matrix-input-container">
                                 <!-- Campos de entrada de matriz A se generarán aquí dinámicamente -->
     
@@ -34,11 +34,18 @@
                             <button type="button" class="add-column">Agregar Columna</button>
                         </div>
                 </div>
-
-                <div class="col-md-4">
+                <div class="col-md-1 p-4">
+                    <div class="row">
+                        <button>Sumar</button>
+                    </div>
+                    <div class="row">
+                        <button>Restar</button>
+                    </div>
+                </div>
+                <div class="col-md-3 p-4">
                     <div id="matrixInputsB">
                         <!-- Similar a la entrada de Matriz A -->
-                        <h2>Matriz B</h2>
+                        <h3 class="text-center">Matriz B</h2>
                         <div class="matrix-input-container">
                         <!-- Campos de entrada de matriz A se generarán aquí dinámicamente -->
                     </div>
@@ -50,10 +57,12 @@
                     <button type="button" id="multiplicationButton">Multiplicar</button>
                 </form>
                 </div>
-
-                <div class="col-md-4">
+                <div class="col-md-1 p4">
+                    <h3>=</h3>
+                </div> 
+                <div class="col-md-3 p-4">
                     <div id="result">
-                        <h2>Resultado</h2>
+                        <h3 class="text-center">Resultado</h2>
                         <div class="matrix-input-container"></div>
                     </div>
                 </div>

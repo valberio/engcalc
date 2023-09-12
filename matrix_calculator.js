@@ -26,10 +26,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function createDisplayRow(columnCount){
         const row = document.createElement("div");
-        row.classList.add("matrix-display-row");
-
+        row.classList.add("row", "matrix-display-row");
+        
         for(let j = 0; j < columnCount; j++){
             const cell = document.createElement("input");
+            cell.classList.add("col");
             cell.readOnly = true;
             cell.value = 0;
             cell.addEventListener("keydown", handleArrowKeys);
@@ -40,9 +41,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function createInputRow(rowCount, colCount) {
         const rowDiv = document.createElement("div");
-        rowDiv.classList.add("matrix-input-row");
+        rowDiv.classList.add("row", "matrix-input-row");
         for (let j = 0; j < colCount; j++) {
             const input = document.createElement("input");
+            input.classList.add("col");
             input.value = 0;
             input.addEventListener("keydown", handleArrowKeys);
             rowDiv.appendChild(input);
