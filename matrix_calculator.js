@@ -305,4 +305,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 })
 
-//TO DO: dimension checks
+//TO DO: perform operations on dimensions different than 3x3
