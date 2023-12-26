@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const matrixInputsContainerA = document.querySelector("#matrixInputsA .matrix-input-container");
     const matrixInputsContainerB = document.querySelector("#matrixInputsB .matrix-input-container");
     const resultMatrix = document.querySelector("#result .matrix-input-container");
+    const historyCol = document.getElementById("history");
     createFirstMatrixes();
 
     function createFirstMatrixes(){
@@ -242,6 +243,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             result.push(row);
         }
+        recordOperationInHistory(matrixA, "+", result, matrixB);
         return result;
     }
 
@@ -257,6 +259,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             result.push(row);
         }
+        recordOperationInHistory(matrixA, "-", result, matrixB);
         return result;
     }
 
@@ -274,6 +277,9 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             result.push(resultRow);
         }
+
+        recordOperationInHistory(matrixA, "x", result, matrixB);
+
         return result;
     }
     
@@ -303,6 +309,49 @@ document.addEventListener("DOMContentLoaded", () => {
         canOperationsBePerfomed = ((ammountOfRows(matrixA) == ammountOfRows(matrixB)) && (ammountOfCols(matrixA) == ammountOfCols(matrixB)));
         console.log(`Can operations be perfomed: ${canOperationsBePerfomed}`);
         return canOperationsBePerfomed;
+    }
+
+    function htmlObjectOutOfMatrix(matrix){
+        const table = document.createElement("table");
+
+        for (let i = 0; i < matrix.length; i++) {
+            const row = document.createElement("tr");
+
+            for (let j = 0; j < matrix[i].length; j++) {
+                const cell = document.createElement("td");
+                cell.textContent = matrix[i][j];
+                row.appendChild(cell);
+            }
+
+            table.appendChild(row);
+        }
+        return table
+    }
+
+    function recordOperationInHistory(matrixA, operation, matrixResult, matrixB){
+
+        const rowHistory = document.createElement("div");
+        rowHistory.classList.add("row");
+
+        const table = htmlObjectOutOfMatrix(matrixA);
+
+        rowHistory.appendChild(table);
+
+        const operationText = document.createElement("h4");
+        operationText.textContent = operation;
+        rowHistory.appendChild(operationText);
+
+        const tableB = htmlObjectOutOfMatrix(matrixB);
+        rowHistory.appendChild(tableB);
+
+        const result = document.createElement("h4");
+        result.textContent = "=";
+        rowHistory.appendChild(result);
+        
+        const tableResult = htmlObjectOutOfMatrix(matrixResult);
+        rowHistory.appendChild(tableResult); 
+        
+        historyCol.appendChild(rowHistory);
     }
 })
 
