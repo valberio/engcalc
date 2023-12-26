@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
         for (let j = 0; j < colCount; j++) {
             const input = document.createElement("input");
             input.classList.add("col");
-            input.value = 0;
+            input.placeholder = 0;
             input.addEventListener("keydown", handleArrowKeys);
             rowDiv.appendChild(input);
         }
@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const inputRows = matrixInputsContainerB.querySelectorAll(".matrix-input-row");
         inputRows.forEach(row => {
             const input = document.createElement("input");
-            input.value = 0;
+
             input.classList.add("col");
             row.appendChild(input);
         });
@@ -198,12 +198,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
             for (let j = 0; j < qCols; j++) {
                 const cellValue = parseFloat(cols[j].value);
-                row.push(cellValue);
+                row.push(isNaN(cellValue) ? 0 : cellValue);
             }
             matrix.push(row);
         }
         
         console.log(`Matrix A is ${matrix}`);
+        console.log(matrix);
         return matrix;
     }
 
@@ -220,7 +221,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             for (let j = 0; j < qCols; j++) {
                 const cellValue = parseFloat(cols[j].value);
-                row.push(cellValue);
+                row.push(isNaN(cellValue) ? 0 : cellValue);
             }
             matrix.push(row);
         }
