@@ -106,7 +106,47 @@ document.addEventListener("DOMContentLoaded", () => {
         writeDeterminantResult(matrixA, detA);
     })
 
+
     function handleArrowKeys(event) {
+
+        const currentInput = event.target;
+        const currentRow = currentInput.closest(".matrix-input-row");
+        const currentRowCells = Array.from(currentRow.querySelectorAll("input"));
+        const currentIndex = currentRowCells.indexOf(currentInput);
+
+        const rows = Array.from(document.querySelectorAll(".matrix-input-row"));
+        const currentRowIndex = rows.indexOf(currentRow);
+        
+
+        let nextRowIndex; 
+        let nextIndex = currentIndex;
+        let nextRow = currentRow;
+        let nextRowCells = currentRowCells;
+        if (event.key == "ArrowLeft"){
+            nextIndex = Math.max(0, currentIndex - 1);
+        }
+        else if (event.key == "ArrowRight"){
+            nextIndex = Math.min(currentRowCells.length - 1, currentIndex + 1);
+        }
+        else if (event.key == "ArrowUp"){
+            nextRowIndex = Math.max(0, currentRowIndex - 1);
+            nextRow = rows[nextRowIndex];
+            nextRowCells = Array.from(nextRow.querySelectorAll("input"));
+
+        }
+        else if (event.key == "ArrowDown"){
+            nextRowIndex = Math.min(rows.length - 1, currentRowIndex + 1);
+            nextRow = rows[nextRowIndex];
+            nextRowCells = Array.from(nextRow.querySelectorAll("input"));
+        }
+
+        console.log(`current index cell ${currentIndex} current row index ${currentRowIndex} next index cell ${nextIndex} next row index ${nextRowIndex}`)
+        nextRowCells[nextIndex].focus();
+    }
+
+
+
+   /* function handleArrowKeys(event) {
         const input = event.target;
         const row = input.closest(".matrix-input-row");
         const rowInputs = Array.from(row.querySelectorAll("input"));
@@ -118,26 +158,32 @@ document.addEventListener("DOMContentLoaded", () => {
             nextIndex = Math.max(0, currentIndex - 1);
         } else if (event.key === "ArrowRight") {
             nextIndex = Math.min(rowInputs.length - 1, currentIndex + 1);
+
         } else if (event.key === "ArrowUp") {
+
             const rowIndex = Array.from(matrixInputsContainerA.children).indexOf(row);
             const prevRow = matrixInputsContainerA.children[rowIndex - 1];
             if (prevRow) {
-                nextIndex = Math.min(prevRow.querySelectorAll("input").length - 1, currentIndex);
+                //nextIndex = Math.min(prevRow.querySelectorAll("input").length - 1, currentIndex);
+                nextIndex = currentIndex;
             }
             console.log("Arriba presionado");
+            console.log(`Current index ${rowIndex}, ${currentIndex}`);
+
         } else if (event.key === "ArrowDown") {
             const rowIndex = Array.from(matrixInputsContainerA.children).indexOf(row);
             console.log(`Apretaste abajo en la fila ${rowIndex}`);
             const nextRow = matrixInputsContainerA.children[rowIndex + 1];
             if (nextRow) {
                 //nextIndex = Math.min(nextRow.querySelectorAll("input").length - 1, currentIndex);
+                nextIndex = currentIndex;
                 console.log("entre");
             }
             console.log("Abajo presionado");
         }
 
         rowInputs[nextIndex].focus();
-    }
+    }*/
 
     function performAddition(){
         const A = getMatrixA();
