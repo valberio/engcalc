@@ -33,7 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const cell = document.createElement("input");
             cell.classList.add("col");
             cell.readOnly = true;
-            cell.value = 0;
             cell.addEventListener("keydown", handleArrowKeys);
             row.appendChild(cell);
         }
@@ -46,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
         for (let j = 0; j < colCount; j++) {
             const input = document.createElement("input");
             input.classList.add("col");
-            input.placeholder = 0;
+
             input.addEventListener("keydown", handleArrowKeys);
             rowDiv.appendChild(input);
         }
@@ -68,7 +67,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const inputRows = matrixInputsContainerA.querySelectorAll(".matrix-input-row");
         inputRows.forEach(row => {
             const input = document.createElement("input");
-            input.value = 0;
             input.classList.add("col");
             row.appendChild(input);
         });
@@ -101,6 +99,11 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("multiplicationButton").addEventListener("click", function() {
         performMultiplication();
         checkEqualRowsAndCols(getMatrixA(), getMatrixB());
+    })
+    document.getElementById("determinant-A").addEventListener("click", function(){
+        const matrixA = getMatrixA();
+        const detA = determinant(matrixA);
+        writeDeterminantResult(matrixA, detA);
     })
 
     function handleArrowKeys(event) {
@@ -231,6 +234,21 @@ document.addEventListener("DOMContentLoaded", () => {
         return matrix;       
     }
 
+    function lastColIsEmpty(matrix){
+
+        const length = matrix[0].length;
+        const temp = matrix.every(row => row[length - 1] === 0);
+        console.log(matrix, temp); 
+        return temp;
+    }
+
+    function lastRowIsEmpty(matrix){
+        const length = matrix.length;
+        const temp =  matrix[length - 1].every(cell => cell === 0);
+        console.log(matrix,temp);
+        return temp;
+    }
+
     function addMatrixes(matrixA, matrixB){
         const result = [];
 
@@ -351,6 +369,40 @@ document.addEventListener("DOMContentLoaded", () => {
         const tableResult = htmlObjectOutOfMatrix(matrixResult);
         rowHistory.appendChild(tableResult); 
         
+        historyCol.appendChild(rowHistory);
+    }
+
+    function matrixIsSquare(matrix){
+        return matrix.length === matrix[0].length;
+    }
+
+    function determinant(matrix){
+       
+        const det = 0;
+
+        if (matrixIsSquare(matrix)){  
+            if (matrix.length === 2){
+                
+                return matrix[0][0]*matrix[1][1] - matrix[0][1]*matrix[1][0];
+            }
+            if (matrix.length === 3){
+                return (matrix[0][0]*matrix[1][1]*matrix[2][2] + matrix[0][1]*matrix[1][2]*matrix[0][2] + matrix[0][2]*matrix[1][0]*matrix[2][1]
+                        - matrix[0][2]*matrix[1][1]*matrix[2][0] - matrix[0][1]*matrix[1][0]*matrix[2][2] - matrix[0][0]*matrix[1][2]*matrix[2][1]); 
+            }
+            }
+    }
+
+    function writeDeterminantResult(matrix, determinant){
+        const rowHistory = document.createElement("div");
+        rowHistory.classList.add("row");
+
+        const matrixHTML = htmlObjectOutOfMatrix(matrix);
+        rowHistory.appendChild(matrixHTML);
+
+        const detHTML = document.createElement("h4");
+        detHTML.textContent = determinant;
+        rowHistory.appendChild(detHTML);
+
         historyCol.appendChild(rowHistory);
     }
 })
