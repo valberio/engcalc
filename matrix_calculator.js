@@ -108,6 +108,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const detA = determinant(matrixA);
         writeDeterminantResult(matrixA, detA);
     })
+    document.getElementById("clean-matrixA").addEventListener("click", () => {cleanMatrix(matrixInputsContainerA);});
+    document.getElementById("clean-matrixB").addEventListener("click", () => {cleanMatrix(matrixInputsContainerB);});
 
 
     function handleArrowKeys(event) {
@@ -148,16 +150,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function fillInWith0Placeholder(event){
-        
-        
-        
-
-        //const rows = Array.from(document.querySelectorAll(".matrix-input-row"));
-        
-
-        //Fill in with 0 placeholder all the cells IN the row
-
-
         const currentInput = event.target;
         const currentRow = currentInput.closest(".matrix-input-row");
         let currentMatrix;
@@ -169,7 +161,6 @@ document.addEventListener("DOMContentLoaded", () => {
             currentMatrix = matrixInputsContainerB;
         }
 
-        //Now, i select all the rows in that particular matrix
         const rows = Array.from(currentMatrix.querySelectorAll(".matrix-input-row"));
         const currentRowCells = Array.from(currentRow.querySelectorAll("input"));
         const currentIndex = currentRowCells.indexOf(currentInput);
@@ -186,45 +177,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     }
-
-   /* function handleArrowKeys(event) {
-        const input = event.target;
-        const row = input.closest(".matrix-input-row");
-        const rowInputs = Array.from(row.querySelectorAll("input"));
-        const rows = document.querySelectorAll("matrix-input-row");
-        const currentIndex = rowInputs.indexOf(input);
-        let nextIndex = currentIndex;
-
-        if (event.key === "ArrowLeft") {
-            nextIndex = Math.max(0, currentIndex - 1);
-        } else if (event.key === "ArrowRight") {
-            nextIndex = Math.min(rowInputs.length - 1, currentIndex + 1);
-
-        } else if (event.key === "ArrowUp") {
-
-            const rowIndex = Array.from(matrixInputsContainerA.children).indexOf(row);
-            const prevRow = matrixInputsContainerA.children[rowIndex - 1];
-            if (prevRow) {
-                //nextIndex = Math.min(prevRow.querySelectorAll("input").length - 1, currentIndex);
-                nextIndex = currentIndex;
-            }
-            console.log("Arriba presionado");
-            console.log(`Current index ${rowIndex}, ${currentIndex}`);
-
-        } else if (event.key === "ArrowDown") {
-            const rowIndex = Array.from(matrixInputsContainerA.children).indexOf(row);
-            console.log(`Apretaste abajo en la fila ${rowIndex}`);
-            const nextRow = matrixInputsContainerA.children[rowIndex + 1];
-            if (nextRow) {
-                //nextIndex = Math.min(nextRow.querySelectorAll("input").length - 1, currentIndex);
-                nextIndex = currentIndex;
-                console.log("entre");
-            }
-            console.log("Abajo presionado");
-        }
-
-        rowInputs[nextIndex].focus();
-    }*/
 
     function performAddition(){
         const A = getMatrixA();
@@ -325,6 +277,18 @@ document.addEventListener("DOMContentLoaded", () => {
         
         console.log(`Matrix B is ${matrix}`);
         return matrix;       
+    }
+
+    function cleanMatrix(matrixContainer){
+        console.log("clean matrix");
+        const rows = Array.from(matrixContainer.querySelectorAll(".matrix-input-row"));
+
+        for (let i = 0; i < rows.length; i++){
+            const cells = Array.from(rows[i].querySelectorAll("input"));
+            for (let j = 0; j < cells.length; j++){
+                cells[j].value = '';
+            }
+        }
     }
 
     function lastColIsEmpty(matrix){
