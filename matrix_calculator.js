@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
         for (let j = 0; j < colCount; j++) {
             const input = document.createElement("input");
             input.classList.add("col");
-
+            input.addEventListener("input", fillInWith0Placeholder);
             input.addEventListener("keydown", handleArrowKeys);
             rowDiv.appendChild(input);
         }
@@ -67,6 +67,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const inputRows = matrixInputsContainerA.querySelectorAll(".matrix-input-row");
         inputRows.forEach(row => {
             const input = document.createElement("input");
+            input.addEventListener("keydown", handleArrowKeys);
+            input.addEventListener("input", fillInWith0Placeholder);
             input.classList.add("col");
             row.appendChild(input);
         });
@@ -84,7 +86,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const inputRows = matrixInputsContainerB.querySelectorAll(".matrix-input-row");
         inputRows.forEach(row => {
             const input = document.createElement("input");
-
+            input.addEventListener("keydown", handleArrowKeys);
+            input.addEventListener("input", fillInWith0Placeholder);
             input.classList.add("col");
             row.appendChild(input);
         });
@@ -144,7 +147,45 @@ document.addEventListener("DOMContentLoaded", () => {
         nextRowCells[nextIndex].focus();
     }
 
+    function fillInWith0Placeholder(event){
+        
+        
+        
 
+        //const rows = Array.from(document.querySelectorAll(".matrix-input-row"));
+        
+
+        //Fill in with 0 placeholder all the cells IN the row
+
+
+        const currentInput = event.target;
+        const currentRow = currentInput.closest(".matrix-input-row");
+        let currentMatrix;
+
+        if (matrixInputsContainerA.contains(currentInput)){
+            currentMatrix = matrixInputsContainerA;
+        }
+        else if (matrixInputsContainerB.contains(currentInput)){
+            currentMatrix = matrixInputsContainerB;
+        }
+
+        //Now, i select all the rows in that particular matrix
+        const rows = Array.from(currentMatrix.querySelectorAll(".matrix-input-row"));
+        const currentRowCells = Array.from(currentRow.querySelectorAll("input"));
+        const currentIndex = currentRowCells.indexOf(currentInput);
+        const currentRowIndex = rows.indexOf(currentRow);
+
+        for (let i = 0; i < currentIndex; i++){
+            currentRowCells[i].value = "0";
+        }
+
+        for (let i = 0; i < currentRowIndex; i++){
+            const cellsInRow = Array.from(rows[i].querySelectorAll("input"));
+            for (let j = 0; j <= currentIndex; j++){
+                cellsInRow[j].value = "0";
+            }
+        }
+    }
 
    /* function handleArrowKeys(event) {
         const input = event.target;
@@ -248,7 +289,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
             for (let j = 0; j < qCols; j++) {
                 const cellValue = parseFloat(cols[j].value);
-                row.push(isNaN(cellValue) ? 0 : cellValue);
+                if (!isNaN(cellValue)){
+                    row.push(cellValue);
+                }
+                //row.push(isNaN(cellValue) ? 0 : cellValue);
             }
             matrix.push(row);
         }
@@ -271,7 +315,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
             for (let j = 0; j < qCols; j++) {
                 const cellValue = parseFloat(cols[j].value);
-                row.push(isNaN(cellValue) ? 0 : cellValue);
+                if (!isNaN(cellValue)){
+                    row.push(cellValue);
+                }
+                //row.push(isNaN(cellValue) ? 0 : cellValue);
             }
             matrix.push(row);
         }
