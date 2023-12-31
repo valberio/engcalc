@@ -108,6 +108,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const detA = determinant(matrixA);
         writeDeterminantResult(matrixA, detA);
     })
+    document.getElementById("determinant-B").addEventListener("click", function(){
+        const matrixB = getMatrixB();
+        const detB = determinant(matrixB);
+        writeDeterminantResult(matrixB, detB);
+    })
     document.getElementById("clean-matrixA").addEventListener("click", () => {cleanMatrix(matrixInputsContainerA);});
     document.getElementById("clean-matrixB").addEventListener("click", () => {cleanMatrix(matrixInputsContainerB);});
 
