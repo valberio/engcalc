@@ -225,17 +225,21 @@ document.addEventListener("DOMContentLoaded", () => {
         const currentRowIndex = rows.indexOf(currentRow);
 
         for (let i = 0; i < currentIndex; i++){
-            currentRowCells[i].value = "0";
+            if (currentRowCells[i].value == ''){
+                currentRowCells[i].value = "0";
+            }   
         }
-
         for (let i = 0; i < currentRowIndex; i++){
             const cellsInRow = Array.from(rows[i].querySelectorAll("input"));
             for (let j = 0; j <= currentIndex; j++){
-                cellsInRow[j].value = "0";
+                if(cellsInRow[j].value == ''){
+                    cellsInRow[j].value = "0";
+                }
+                
             }
         }
     }
-
+    
     function performAddition(){
         const A = getMatrixA();
         const B = getMatrixB();
