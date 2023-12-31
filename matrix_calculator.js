@@ -119,10 +119,17 @@ document.addEventListener("DOMContentLoaded", () => {
         const currentRowCells = Array.from(currentRow.querySelectorAll("input"));
         const currentIndex = currentRowCells.indexOf(currentInput);
 
-        const rows = Array.from(document.querySelectorAll(".matrix-input-row"));
-        const currentRowIndex = rows.indexOf(currentRow);
-        
+        let matrixOfEvent;
 
+        if (matrixInputsContainerA.contains(currentInput)){
+            matrixOfEvent = matrixInputsContainerA;
+        }
+        else if (matrixInputsContainerB.contains(currentInput)){
+            matrixOfEvent = matrixInputsContainerB;
+        }
+
+        let rows = Array.from(matrixOfEvent.querySelectorAll(".matrix-input-row"));
+        const currentRowIndex = rows.indexOf(currentRow);
         let nextRowIndex; 
         let nextIndex = currentIndex;
         let nextRow = currentRow;
@@ -131,7 +138,20 @@ document.addEventListener("DOMContentLoaded", () => {
             nextIndex = Math.max(0, currentIndex - 1);
         }
         else if (event.key == "ArrowRight"){
+            console.log(`${currentRowCells.length} ${currentIndex}`)
+            if (currentRowCells.length == (currentIndex + 1)){
+                const colCount = matrixOfEvent.querySelector(".matrix-input-row")?.childElementCount + 1 || 2;
+                const inputRows = matrixOfEvent.querySelectorAll(".matrix-input-row");
+                inputRows.forEach(row => {
+                    const input = document.createElement("input");
+                    input.addEventListener("keydown", handleArrowKeys);
+                    input.addEventListener("input", fillInWith0Placeholder);
+                    input.classList.add("col");
+                    row.appendChild(input);
+                    });
+            }
             nextIndex = Math.min(currentRowCells.length - 1, currentIndex + 1);
+
         }
         else if (event.key == "ArrowUp"){
             nextRowIndex = Math.max(0, currentRowIndex - 1);
@@ -140,6 +160,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
         else if (event.key == "ArrowDown"){
+
+            console.log(`${(rows.length - 1)} ${currentRowIndex}`);
+            if ((rows.length - 1) == currentRowIndex){
+                const rowCount = matrixOfEvent.childElementCount + 1;
+                const colCount = matrixOfEvent.querySelector(".matrix-input-row")?.childElementCount || 2;
+                const inputRow = createInputRow(rowCount, colCount);
+                matrixOfEvent.appendChild(inputRow);
+            }
+
+            rows = Array.from(matrixOfEvent.querySelectorAll(".matrix-input-row"));
+
             nextRowIndex = Math.min(rows.length - 1, currentRowIndex + 1);
             nextRow = rows[nextRowIndex];
             nextRowCells = Array.from(nextRow.querySelectorAll("input"));
