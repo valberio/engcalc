@@ -120,12 +120,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const currentIndex = currentRowCells.indexOf(currentInput);
 
         let matrixOfEvent;
+        let numericalMatrixOfEvent;
 
         if (matrixInputsContainerA.contains(currentInput)){
             matrixOfEvent = matrixInputsContainerA;
+            numericalMatrixOfEvent = getMatrixA();
         }
         else if (matrixInputsContainerB.contains(currentInput)){
             matrixOfEvent = matrixInputsContainerB;
+            numericalMatrixOfEvent = getMatrixB();
         }
 
         let rows = Array.from(matrixOfEvent.querySelectorAll(".matrix-input-row"));
@@ -136,6 +139,19 @@ document.addEventListener("DOMContentLoaded", () => {
         let nextRowCells = currentRowCells;
         if (event.key == "ArrowLeft"){
             nextIndex = Math.max(0, currentIndex - 1);
+            console.log(`${lastColIsEmpty(numericalMatrixOfEvent)} ${currentRowCells.length}`);
+            if (lastColIsEmpty(numericalMatrixOfEvent) && (currentRowCells.length > 3)){
+                
+                rows.forEach(row => {
+                    const rowCells = Array.from(row.querySelectorAll("input"));
+                    const lastCell = rowCells[rowCells.length - 1];
+                    
+                    if (lastCell) {
+                        lastCell.remove();
+                    }
+                });
+            }
+
         }
         else if (event.key == "ArrowRight"){
             console.log(`${currentRowCells.length} ${currentIndex}`)
@@ -150,13 +166,19 @@ document.addEventListener("DOMContentLoaded", () => {
                     row.appendChild(input);
                     });
             }
-            nextIndex = Math.min(currentRowCells.length - 1, currentIndex + 1);
-
+            
+            nextIndex = currentIndex + 1;
+            nextRowCells = Array.from(currentRow.querySelectorAll("input"));
+            console.log(`${nextIndex}`);
         }
         else if (event.key == "ArrowUp"){
             nextRowIndex = Math.max(0, currentRowIndex - 1);
             nextRow = rows[nextRowIndex];
             nextRowCells = Array.from(nextRow.querySelectorAll("input"));
+            
+            if (lastRowIsEmpty(numericalMatrixOfEvent) && (rows.length > 3)){
+                removeLastRow(matrixOfEvent);
+            }
 
         }
         else if (event.key == "ArrowDown"){
@@ -325,16 +347,25 @@ document.addEventListener("DOMContentLoaded", () => {
     function lastColIsEmpty(matrix){
 
         const length = matrix[0].length;
-        const temp = matrix.every(row => row[length - 1] === 0);
-        console.log(matrix, temp); 
+
+        const temp = matrix.every(row => (row[length - 1] === 0) || (row[length - 1] === undefined));
+        console.log(matrix, temp, length); 
         return temp;
     }
-
+    
     function lastRowIsEmpty(matrix){
         const length = matrix.length;
         const temp =  matrix[length - 1].every(cell => cell === 0);
         console.log(matrix,temp);
         return temp;
+    }
+
+    function removeLastRow(matrixHTMLContainer){
+        
+        const rows = Array.from(matrixHTMLContainer.querySelectorAll(".matrix-input-row"));
+        const cells = Array.from(rows[rows.length - 1].querySelectorAll("input"));
+        cells.forEach(cell => cell.remove());
+        rows[rows.length - 1].remove();
     }
 
     function addMatrixes(matrixA, matrixB){
