@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const cell = document.createElement("input");
             cell.classList.add("col");
             cell.readOnly = true;
-            cell.addEventListener("keydown", handleArrowKeys);
+            cell.addEventListener("keyup", handleArrowKeys);
             row.appendChild(cell);
         }
         return row;
@@ -44,15 +44,19 @@ document.addEventListener("DOMContentLoaded", () => {
         rowDiv.classList.add("row", "matrix-input-row");
         for (let j = 0; j < colCount; j++) {
             const input = document.createElement("input");
+            input.type = "text";
             input.classList.add("col");
             input.addEventListener("input", fillInWith0Placeholder);
-            input.addEventListener("keydown", handleArrowKeys);
+            input.addEventListener("keyup", handleArrowKeys);
             rowDiv.appendChild(input);
         }
         return rowDiv;
     }
 
-    document.querySelector("input").addEventListener("keydown", handleArrowKeys);
+    document.getElementById("input-text").addEventListener("keyup", () => {
+        const test_input = document.getElementById("input-text");
+        test_input.select();
+    });
 
     document.getElementById("add-row-A").addEventListener("click", () => {
         const rowCount = matrixInputsContainerA.childElementCount + 1;
@@ -67,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const inputRows = matrixInputsContainerA.querySelectorAll(".matrix-input-row");
         inputRows.forEach(row => {
             const input = document.createElement("input");
-            input.addEventListener("keydown", handleArrowKeys);
+            input.addEventListener("keyup", handleArrowKeys);
             input.addEventListener("input", fillInWith0Placeholder);
             input.classList.add("col");
             row.appendChild(input);
@@ -86,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const inputRows = matrixInputsContainerB.querySelectorAll(".matrix-input-row");
         inputRows.forEach(row => {
             const input = document.createElement("input");
-            input.addEventListener("keydown", handleArrowKeys);
+            input.addEventListener("keyup", handleArrowKeys);
             input.addEventListener("input", fillInWith0Placeholder);
             input.classList.add("col");
             row.appendChild(input);
@@ -156,6 +160,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 });
             }
+            nextRowCells[nextIndex].focus();
+            nextRowCells[nextIndex].select();
 
         }
         else if (event.key == "ArrowRight"){
@@ -165,7 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const inputRows = matrixOfEvent.querySelectorAll(".matrix-input-row");
                 inputRows.forEach(row => {
                     const input = document.createElement("input");
-                    input.addEventListener("keydown", handleArrowKeys);
+                    input.addEventListener("keyup", handleArrowKeys);
                     input.addEventListener("input", fillInWith0Placeholder);
                     input.classList.add("col");
                     row.appendChild(input);
@@ -175,6 +181,8 @@ document.addEventListener("DOMContentLoaded", () => {
             nextIndex = currentIndex + 1;
             nextRowCells = Array.from(currentRow.querySelectorAll("input"));
             console.log(`${nextIndex}`);
+            nextRowCells[nextIndex].focus();
+            nextRowCells[nextIndex].select();
         }
         else if (event.key == "ArrowUp"){
             nextRowIndex = Math.max(0, currentRowIndex - 1);
@@ -184,6 +192,8 @@ document.addEventListener("DOMContentLoaded", () => {
             if (lastRowIsEmpty(numericalMatrixOfEvent) && (rows.length > 3)){
                 removeLastRow(matrixOfEvent);
             }
+            nextRowCells[nextIndex].focus();
+            nextRowCells[nextIndex].select();
 
         }
         else if (event.key == "ArrowDown"){
@@ -201,10 +211,12 @@ document.addEventListener("DOMContentLoaded", () => {
             nextRowIndex = Math.min(rows.length - 1, currentRowIndex + 1);
             nextRow = rows[nextRowIndex];
             nextRowCells = Array.from(nextRow.querySelectorAll("input"));
+            nextRowCells[nextIndex].focus();
+            nextRowCells[nextIndex].select();
         }
 
-        console.log(`current index cell ${currentIndex} current row index ${currentRowIndex} next index cell ${nextIndex} next row index ${nextRowIndex}`)
-        nextRowCells[nextIndex].focus();
+        console.log(`current index cell ${currentIndex} current row index ${currentRowIndex} next index cell ${nextIndex} next row index ${nextRowIndex}`);
+
     }
 
     function fillInWith0Placeholder(event){
