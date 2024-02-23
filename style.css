@@ -1,5 +1,25 @@
-.borde {
-    border: 1px solid black;
 
+.text {
+    font-family: Helvetica, Arial, serif;
+    font-weight: lighter;
+    color:black;
 }
+
+.button {
+    background-color: transparent;
+    color: black;
+    border: 1px solid black;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+/* Button Hover Styles */
+.button:hover {
+    background-color: black;
+    color: white;
+    border-color: white;
+}
+
 

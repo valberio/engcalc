@@ -3,58 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Calculadora de Matrices</title>
 </head>
 <body>
-
-    <div class="container-fluid mt-2 borde">
+    <div class="container-fluid mt-2">
         <!--Menú lateral izquierdo-->
-        <div class="row mt-2 borde">
-            <div class="col-md-2 borde ps-4">
-                <h3 class="borde mt-4">Otras calculadoras</h3>
+        <div class="row mt-2">
+            <div class="col-md-3">
+                <h4 class="mt-4 ps-3">Otras calculadoras</h3>
             </div>
 
         <!--Zona de matrices y cálculos-->
-        <div class="col-md-10">
+        <div class="col-md-9">
             <div class="row mt-4">
-                <h1>Calculadora de Matrices</h1>
+                <h2 class="text">CALCULADORA DE MATRICES</h1>
             </div>
             <div class="row mt-2">
                 <div class="col-md-3 p-4">
                     <div class="row">
                         <form id="matrixForm">
                             <div id="matrixInputsA">
-                                <h3 class="text-center">Matriz A</h2>
+                                <h4 class="text-center text">MATRIZ A</h4>
                                 <div class="matrix-input-container">
                                     <!-- Campos de entrada de matriz A se generarán aquí dinámicamente -->
                                 </div>
                             </div>
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            <button type="button" id="determinant-A">Determinante</button>
+                    <div class="row pt-4">
+                        <div class="col-6 p-1">
+                            <button type="button" id="determinant-A" class="button">Determinante</button>
                         </div>
-                        <div class="col">
-                            <button type="button" id="clean-matrixA">Limpiar</button>
+                        <div class="col-6 p-1">
+                            <button type="button" id="clean-matrixA" class="button">Limpiar</button>
                         </div>        
                     </div>
                 </div>
                 <div class="col-md-1 d-flex flex-column align-items-center justify-content-center borde">
                     <div class="row">
                         <div class="col">
-                            <button type="button" id="additionButton">+</button>
+                            <button type="button" id="additionButton" class="button">+</button>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <button type="button" id="substractionButton">-</button>
+                            <button type="button" id="substractionButton" class="button">-</button>
                         </div> 
                     </div>
                     <div class="row">
                         <div class="col">
-                            <button type="button" id="multiplicationButton">x</button>
+                            <button type="button" id="multiplicationButton" class="button">x</button>
                         </div>
                     </div>
                 </div>
@@ -62,18 +61,18 @@
                     <div class="row">
                         <form id="matrixFormB">
                             <div id="matrixInputsB">
-                                <h3 class="text-center">Matriz B</h2>
+                                <h4 class="text-center text">MATRIZ B</h4>
                                 <div class="matrix-input-container">
                                 <!-- Campos de entrada de matriz A se generarán aquí dinámicamente -->
                                 </div>
                             </div>
                     </div>
-                    <div class="row p-2">
-                        <div class="col">
-                            <button type="button" id="determinant-B">Determinante</button>
+                    <div class="row pt-4">
+                        <div class="col-6">
+                            <button type="button" id="determinant-B" class="button">Determinante</button>
                         </div>
-                        <div class="col">
-                            <button type="button" id="clean-matrixB">Limpiar</button>
+                        <div class="col-6">
+                            <button type="button" id="clean-matrixB" class="button">Limpiar</button>
                         </div>
                     </div>                    
                 </div>
@@ -82,7 +81,7 @@
                 </div> 
                 <div class="col-md-3 p-4">
                     <div id="result">
-                        <h3 class="text-center">Resultado</h2>
+                        <h4 class="text-center text">RESULTADO</h4>
                         <div class="matrix-input-container"></div>
                     </div>
                 </div>

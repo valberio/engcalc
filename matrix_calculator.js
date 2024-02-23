@@ -27,11 +27,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function createDisplayRow(columnCount){
         const row = document.createElement("div");
-        row.classList.add("row", "matrix-display-row");
+        row.classList.add("row", "p-1", "matrix-display-row");
         
         for(let j = 0; j < columnCount; j++){
             const cell = document.createElement("input");
-            cell.classList.add("col");
+            cell.classList.add("col", "mx-1");
             cell.readOnly = true;
             cell.addEventListener("keyup", handleArrowKeys);
             row.appendChild(cell);
@@ -41,11 +41,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function createInputRow(rowCount, colCount) {
         const rowDiv = document.createElement("div");
-        rowDiv.classList.add("row", "matrix-input-row");
+        rowDiv.classList.add("row", "p-1", "matrix-input-row");
         for (let j = 0; j < colCount; j++) {
             const input = document.createElement("input");
             input.type = "text";
-            input.classList.add("col");
+            input.classList.add("col", "mx-1");
             input.addEventListener("input", fillInWith0Placeholder);
             input.addEventListener("keyup", handleArrowKeys);
             rowDiv.appendChild(input);
