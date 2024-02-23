@@ -1,5 +1,5 @@
 //TO-DO//
-/* -Cast a matrix to the result display
+/* -Add last operation on top of the history, format it better
 */
 
 
@@ -53,50 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return rowDiv;
     }
 
-    document.getElementById("input-text").addEventListener("keyup", () => {
-        const test_input = document.getElementById("input-text");
-        test_input.select();
-    });
-
-    document.getElementById("add-row-A").addEventListener("click", () => {
-        const rowCount = matrixInputsContainerA.childElementCount + 1;
-        const colCount = matrixInputsContainerA.querySelector(".matrix-input-row")?.childElementCount || 2;
-        const inputRow = createInputRow(rowCount, colCount);
-        matrixInputsContainerA.appendChild(inputRow);
-    });
-
-
-    document.getElementById("add-col-A").addEventListener("click", () => {
-        const colCount = matrixInputsContainerA.querySelector(".matrix-input-row")?.childElementCount + 1 || 2;
-        const inputRows = matrixInputsContainerA.querySelectorAll(".matrix-input-row");
-        inputRows.forEach(row => {
-            const input = document.createElement("input");
-            input.addEventListener("keyup", handleArrowKeys);
-            input.addEventListener("input", fillInWith0Placeholder);
-            input.classList.add("col");
-            row.appendChild(input);
-        });
-    });
-
-    document.getElementById("add-row-B").addEventListener("click", () => {
-        const rowCount = matrixInputsContainerB.childElementCount + 1;
-        const colCount = matrixInputsContainerB.querySelector(".matrix-input-row")?.childElementCount || 2;
-        const inputRow = createInputRow(rowCount, colCount);
-        matrixInputsContainerB.appendChild(inputRow);
-    });
-
-    document.getElementById("add-col-B").addEventListener("click", () => {
-        const colCount = matrixInputsContainerB.querySelector(".matrix-input-row")?.childElementCount + 1 || 2;
-        const inputRows = matrixInputsContainerB.querySelectorAll(".matrix-input-row");
-        inputRows.forEach(row => {
-            const input = document.createElement("input");
-            input.addEventListener("keyup", handleArrowKeys);
-            input.addEventListener("input", fillInWith0Placeholder);
-            input.classList.add("col");
-            row.appendChild(input);
-        });
-    });
-
     document.getElementById("additionButton").addEventListener("click", () => {performAddition();})
                                                                                     
     document.getElementById("substractionButton").addEventListener("click", function() {
@@ -149,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (event.key == "ArrowLeft"){
             nextIndex = Math.max(0, currentIndex - 1);
             console.log(`${lastColIsEmpty(numericalMatrixOfEvent)} ${currentRowCells.length}`);
-            if (lastColIsEmpty(numericalMatrixOfEvent) && (currentRowCells.length > 3)){
+            if (isLastInputRowEmpty(matrixOfEvent) && (currentRowCells.length > 3)){
                 
                 rows.forEach(row => {
                     const rowCells = Array.from(row.querySelectorAll("input"));
@@ -160,6 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 });
             }
+            console.log(isLastInputRowEmpty(matrixOfEvent));
             nextRowCells[nextIndex].focus();
             nextRowCells[nextIndex].select();
 
@@ -381,6 +338,25 @@ document.addEventListener("DOMContentLoaded", () => {
         return temp;
     }
 
+    function isLastInputRowEmpty(matrixInputContainer) {
+        const rows = matrixInputContainer.children;
+        var isEmpty = false;
+    
+        for (let i = 0; i < rows.length; i++) {
+            const inputs = rows[i].querySelectorAll('input');
+            const lastInput = inputs[inputs.length - 1];
+
+            if (lastInput.value.trim() === "" ||lastInput.value.trim() === "0") {
+                isEmpty = true;
+            }
+            else{
+                isEmpty = false;
+            }
+        }
+    
+        return isEmpty;
+    }
+
     function removeLastRow(matrixHTMLContainer){
         
         const rows = Array.from(matrixHTMLContainer.querySelectorAll(".matrix-input-row"));
@@ -489,6 +465,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function recordOperationInHistory(matrixA, operation, matrixResult, matrixB){
 
         const rowHistory = document.createElement("div");
+        let firstChild = historyCol.firstChild;
         rowHistory.classList.add("row");
 
         const table = htmlObjectOutOfMatrix(matrixA);
@@ -509,7 +486,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const tableResult = htmlObjectOutOfMatrix(matrixResult);
         rowHistory.appendChild(tableResult); 
         
-        historyCol.appendChild(rowHistory);
+        historyCol.insertBefore(rowHistory, firstChild);
     }
 
     function matrixIsSquare(matrix){
@@ -522,7 +499,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (matrixIsSquare(matrix)){  
             if (matrix.length === 2){
-                
+                console.log(matrix[0][0]*matrix[1][1] - matrix[0][1]*matrix[1][0]);
                 return matrix[0][0]*matrix[1][1] - matrix[0][1]*matrix[1][0];
             }
             if (matrix.length === 3){
@@ -535,15 +512,20 @@ document.addEventListener("DOMContentLoaded", () => {
     function writeDeterminantResult(matrix, determinant){
         const rowHistory = document.createElement("div");
         rowHistory.classList.add("row");
+        let firstChild = historyCol.firstChild;
 
         const matrixHTML = htmlObjectOutOfMatrix(matrix);
         rowHistory.appendChild(matrixHTML);
+
+        const result = document.createElement("h4");
+        result.textContent = "=";
+        rowHistory.appendChild(result);
 
         const detHTML = document.createElement("h4");
         detHTML.textContent = determinant;
         rowHistory.appendChild(detHTML);
 
-        historyCol.appendChild(rowHistory);
+        historyCol.insertBefore(rowHistory, firstChild);
     }
 })
 

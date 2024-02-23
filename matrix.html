@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Calculadora de Matrices</title>
 </head>
@@ -33,16 +33,12 @@
                             </div>
                     </div>
                     <div class="row">
-                        <button type="button" id="add-row-A">Agregar Fila</button>
-                    </div>
-                    <div class="row">
-                        <button type="button" id="add-col-A">Agregar Columna</button>
-                    </div>
-                    <div class="row">
-                        <button type="button" id="determinant-A">Determinante</button>
-                    </div>
-                    <div class="row">
-                        <button type="button" id="clean-matrixA">Limpiar</button>
+                        <div class="col">
+                            <button type="button" id="determinant-A">Determinante</button>
+                        </div>
+                        <div class="col">
+                            <button type="button" id="clean-matrixA">Limpiar</button>
+                        </div>        
                     </div>
                 </div>
                 <div class="col-md-1 d-flex flex-column align-items-center justify-content-center borde">
@@ -72,22 +68,14 @@
                                 </div>
                             </div>
                     </div>
-                    <div class="row">
-                            <button type="button" id="add-row-B">Agregar Fila</button>
+                    <div class="row p-2">
+                        <div class="col">
+                            <button type="button" id="determinant-B">Determinante</button>
                         </div>
-                        
-                    
-                    <div class="row">
-                        <button type="button" id="add-col-B">Agregar Columna</button>
-                    </div>
-                    <div class="row">
-                        <button type="button" id="clean-matrixB">Limpiar</button>
-                    </div>
-                    <div class="row">
-                        <button type="button" id="determinant-B">Determinante</button>
-                    </div>
-                    
-                    
+                        <div class="col">
+                            <button type="button" id="clean-matrixB">Limpiar</button>
+                        </div>
+                    </div>                    
                 </div>
                 <div class="col-md-1 d-flex flex-column align-items-center justify-content-center borde">
                     <h3>=</h3>
@@ -101,19 +89,12 @@
      
                 </div>
                 <div class="row">
+                    <div class="col">
+                        <h2>Historial</h2>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col" id="history">
-                        <div class="row">
-                            <h2>Historial</h3>
-                        </div>
-                        <div class="row">
-
-                        </div>
-                        <div class="row">
-                            <button type="button" id="button-test">Select</button>
-                        </div>
-                        <div class="row">
-                            <input type="text" id="input-text">
-                        </div>
                     </div>
                 </div>
 
