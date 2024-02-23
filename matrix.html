@@ -10,9 +10,11 @@
 <body>
     <div class="container-fluid mt-2">
         <!--Menú lateral izquierdo-->
-        <div class="row mt-2">
+        <div class="row mt-2 ">
             <div class="col-md-3">
-                <h4 class="mt-4 ps-3">Otras calculadoras</h3>
+               <div class="row">
+                    <h5 class="mt-4 text borde">OTRAS CALCULADORAS</h5>
+               </div> 
             </div>
 
         <!--Zona de matrices y cálculos-->
@@ -22,7 +24,7 @@
             </div>
             <div class="row mt-2">
                 <div class="col-md-3 p-4">
-                    <div class="row">
+                    <div class="row pt-4">
                         <form id="matrixForm">
                             <div id="matrixInputsA">
                                 <h4 class="text-center text">MATRIZ A</h4>
@@ -31,34 +33,34 @@
                                 </div>
                             </div>
                     </div>
-                    <div class="row pt-4">
-                        <div class="col-6 p-1">
-                            <button type="button" id="determinant-A" class="button">Determinante</button>
+                    <div class="row pt-4 justify-content-between">
+                        <div class="col-5 p-1">
+                            <button type="button" id="determinant-A" class="button text">Determinante</button>
                         </div>
-                        <div class="col-6 p-1">
-                            <button type="button" id="clean-matrixA" class="button">Limpiar</button>
+                        <div class="col-5 p-1">
+                            <button type="button" id="clean-matrixA" class="button text">Limpiar</button>
                         </div>        
                     </div>
                 </div>
-                <div class="col-md-1 d-flex flex-column align-items-center justify-content-center borde">
-                    <div class="row">
+                <div class="col-md-1 d-flex flex-column align-items-center justify-content-center">
+                    <div class="row p-1">
                         <div class="col">
-                            <button type="button" id="additionButton" class="button">+</button>
+                            <button type="button" id="additionButton" class="button text">+</button>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row p-1">
                         <div class="col">
-                            <button type="button" id="substractionButton" class="button">-</button>
+                            <button type="button" id="substractionButton" class="button text">-</button>
                         </div> 
                     </div>
-                    <div class="row">
+                    <div class="row p-1">
                         <div class="col">
-                            <button type="button" id="multiplicationButton" class="button">x</button>
+                            <button type="button" id="multiplicationButton" class="button text">x</button>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3 p-4">
-                    <div class="row">
+                    <div class="row pt-4">
                         <form id="matrixFormB">
                             <div id="matrixInputsB">
                                 <h4 class="text-center text">MATRIZ B</h4>
@@ -67,29 +69,32 @@
                                 </div>
                             </div>
                     </div>
-                    <div class="row pt-4">
-                        <div class="col-6">
-                            <button type="button" id="determinant-B" class="button">Determinante</button>
+                    <div class="row pt-4 justify-content-between">
+                        <div class="col-5 p-1">
+                            <button type="button" id="determinant-B" class="button text">Determinante</button>
                         </div>
-                        <div class="col-6">
-                            <button type="button" id="clean-matrixB" class="button">Limpiar</button>
+                        <div class="col-5 p-1">
+                            <button type="button" id="clean-matrixB" class="button text">Limpiar</button>
                         </div>
                     </div>                    
                 </div>
-                <div class="col-md-1 d-flex flex-column align-items-center justify-content-center borde">
+                <div class="col-md-1 d-flex flex-column align-items-center justify-content-center">
                     <h3>=</h3>
                 </div> 
                 <div class="col-md-3 p-4">
                     <div id="result">
-                        <h4 class="text-center text">RESULTADO</h4>
+                        <h4 class="text-center text pt-4">RESULTADO</h4>
                         <div class="matrix-input-container"></div>
                     </div>
                 </div>
      
                 </div>
-                <div class="row">
+                <div class="row pt-4">
                     <div class="col">
-                        <h2>Historial</h2>
+                        <div class="row borde">
+                            <h3 class="text">HISTORIAL</h3>
+                        </div>
+                        
                     </div>
                 </div>
                 <div class="row">

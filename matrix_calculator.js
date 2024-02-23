@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const input = document.createElement("input");
                     input.addEventListener("keyup", handleArrowKeys);
                     input.addEventListener("input", fillInWith0Placeholder);
-                    input.classList.add("col");
+                    input.classList.add("col", "mx-1");
                     row.appendChild(input);
                     });
             }
