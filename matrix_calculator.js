@@ -104,9 +104,8 @@ document.addEventListener("DOMContentLoaded", () => {
         let nextRowCells = currentRowCells;
         if (event.key == "ArrowLeft"){
             nextIndex = Math.max(0, currentIndex - 1);
-            console.log(`${lastColIsEmpty(numericalMatrixOfEvent)} ${currentRowCells.length}`);
+            console.log(`Ultima columna vacia ${lastColIsEmpty(numericalMatrixOfEvent)} ${currentRowCells.length}`);
             if (isLastInputRowEmpty(matrixOfEvent) && (currentRowCells.length > 3)){
-                
                 rows.forEach(row => {
                     const rowCells = Array.from(row.querySelectorAll("input"));
                     const lastCell = rowCells[rowCells.length - 1];
@@ -275,13 +274,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (!isNaN(cellValue)){
                     row.push(cellValue);
                 }
-                //row.push(isNaN(cellValue) ? 0 : cellValue);
             }
+
             matrix.push(row);
         }
         
         console.log(`Matrix A is ${matrix}`);
-        console.log(matrix);
         return matrix;
     }
 
@@ -308,6 +306,19 @@ document.addEventListener("DOMContentLoaded", () => {
         
         console.log(`Matrix B is ${matrix}`);
         return matrix;       
+    }
+
+    function trimMatrix(matrix){
+
+        while(lastRowIsEmpty(matrix)){
+            matrix.pop()
+        }
+        while(lastColIsEmpty(matrix)){
+            for(let i = 0; i < matrix.length; i++){
+                matrix[i].pop();
+            }
+        }
+        return matrix;
     }
 
     function cleanMatrix(matrixContainer){
@@ -351,11 +362,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             else{
                 isEmpty = false;
+                break;
             }
         }
     
         return isEmpty;
     }
+    
 
     function removeLastRow(matrixHTMLContainer){
         
@@ -493,21 +506,30 @@ document.addEventListener("DOMContentLoaded", () => {
         return matrix.length === matrix[0].length;
     }
 
-    function determinant(matrix){
-       
-        const det = 0;
+    // Function to calculate the minor of a matrix
+function minor(matrix, row, col) {
+    return matrix.filter((_, i) => i !== row)
+                 .map(row => row.filter((_, j) => j !== col));
+}
 
-        if (matrixIsSquare(matrix)){  
-            if (matrix.length === 2){
-                console.log(matrix[0][0]*matrix[1][1] - matrix[0][1]*matrix[1][0]);
-                return matrix[0][0]*matrix[1][1] - matrix[0][1]*matrix[1][0];
-            }
-            if (matrix.length === 3){
-                return (matrix[0][0]*matrix[1][1]*matrix[2][2] + matrix[0][1]*matrix[1][2]*matrix[0][2] + matrix[0][2]*matrix[1][0]*matrix[2][1]
-                        - matrix[0][2]*matrix[1][1]*matrix[2][0] - matrix[0][1]*matrix[1][0]*matrix[2][2] - matrix[0][0]*matrix[1][2]*matrix[2][1]); 
-            }
-            }
+// Function to calculate the determinant of a matrix using cofactors
+function determinant(matrix) {
+    if (matrix.length !== matrix[0].length) {
+        throw new Error("Matrix must be square.");
     }
+
+    // Base case for 2x2 matrix
+    if (matrix.length === 2) {
+        return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
+    }
+
+    let det = 0;
+    for (let i = 0; i < matrix.length; i++) {
+        const cofactor = matrix[0][i] * determinant(minor(matrix, 0, i));
+        det += (i % 2 === 0 ? 1 : -1) * cofactor;
+    }
+    return det;
+}
 
     function writeDeterminantResult(matrix, determinant){
         const rowHistory = document.createElement("div");
